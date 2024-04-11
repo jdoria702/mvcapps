@@ -1,9 +1,0 @@
-load 0 0
-load 1 1
-load 2 1
-loop 7 {
-    add 0 1 0
-    add 1 2 1
-}
-halt
-load 0 300
