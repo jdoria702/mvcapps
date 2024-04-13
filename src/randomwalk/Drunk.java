@@ -4,6 +4,7 @@ import mvc.*;
 import simstation.*;
 
 class Drunk extends Agent {
+    private Heading heading;
 
     public Drunk() {
         super();

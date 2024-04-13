@@ -7,7 +7,8 @@ public class Agent implements Runnable {
     private Thread myThread;
     private String name;
     private Heading heading;
-    private int xc, yc;
+    protected int xc;
+    protected int yc;
     private boolean suspended = false, stopped = false;
 
     public void setSimulation(Simulation s) {
@@ -47,6 +48,7 @@ public class Agent implements Runnable {
 
     public void move(int steps) {
         // will change the xc and yc of the agent
+        // call simulation.changed()
     }
 
     public void update() {

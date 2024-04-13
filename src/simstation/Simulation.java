@@ -3,6 +3,7 @@ package simstation;
 import mvc.Model;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Simulation extends Model {
     private int clock = 0;
@@ -16,7 +17,6 @@ public class Simulation extends Model {
             // Start world clock here
             for (Agent a : agents) {
                 a.run();
-                notifySubscribers();  // <-- im not sure if this is the right location
             }
         } else if (cmmd.equalsIgnoreCase("suspend")) {
             for (Agent a : agents) {
@@ -45,8 +45,21 @@ public class Simulation extends Model {
         a.setSimulation(this);
     }
 
-    public Agent getNeighbor(Agent a, double radius) {
-        return null; // for now
+    public Agent getNeighbor(Agent a, double radius) {          // doesn't wrap around
+        List<Agent> closeNeighbors = new LinkedList<Agent>();
+        for (Agent other : agents) {
+            if (Math.pow((other.xc - a.xc), 2) + Math.pow((other.yc - a.yc), 2) <= radius * radius) {
+                closeNeighbors.add(other);
+            }
+        }
+
+        if (closeNeighbors.isEmpty()) {
+            return null;
+        }
+
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(closeNeighbors.size());
+        return closeNeighbors.get(randomIndex);
     }
 
     public void populate() {
