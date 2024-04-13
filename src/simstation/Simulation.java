@@ -1,8 +1,6 @@
 package simstation;
 
 import mvc.Model;
-import mvc.Subscriber;
-
 import java.util.LinkedList;
 import java.util.List;
 
