@@ -53,24 +53,30 @@ public abstract class Agent implements Runnable {
     public void move(int steps) {
         // will change the xc and yc of the agent
         // call simulation.changed()
-        if (heading == Heading.NORTH) {
-            for (int i = 0; i < steps; i++) {
+        for (int i = 0; i < steps; i++) {
+            if (heading == Heading.NORTH) {
                 this.yc++;
+                if (this.yc >= 500) {
+                    this.yc = 0; // Wrap to the top
+                }
                 simulation.changed();
-            }
-        } else if (heading == Heading.EAST) {
-            for (int i = 0; i < steps; i++) {
+            } else if (heading == Heading.EAST) {
                 this.xc++;
+                if (this.xc >= 415) {
+                    this.xc = 0; // Wrap to the left
+                }
                 simulation.changed();
-            }
-        } else if (heading == Heading.SOUTH) {
-            for (int i = 0; i < steps; i++) {
+            } else if (heading == Heading.SOUTH) {
                 this.yc--;
+                if (this.yc < 0) {
+                    this.yc = 500 - 1; // Wrap to the bottom
+                }
                 simulation.changed();
-            }
-        } else if (heading == Heading.WEST) {
-            for (int i = 0; i < steps; i++) {
+            } else if (heading == Heading.WEST) {
                 this.xc--;
+                if (this.xc < 0) {
+                    this.xc = 415 - 1; // Wrap to the right
+                }
                 simulation.changed();
             }
         }
