@@ -2,11 +2,11 @@ package simstation;
 
 import java.io.Serializable;
 
-public class Agent implements Runnable {
+public abstract class Agent implements Runnable {
     private Simulation simulation;
     private Thread myThread;
     private String name;
-    private Heading heading;
+    protected Heading heading;
     protected int xc;
     protected int yc;
     private boolean suspended = false, stopped = false;
@@ -51,7 +51,5 @@ public class Agent implements Runnable {
         // call simulation.changed()
     }
 
-    public void update() {
-        // implemented in subclasses
-    }
+    public abstract void update();
 }
