@@ -16,7 +16,9 @@ public class Simulation extends Model {
             populate();
             // Start world clock here
             for (Agent a : agents) {
-                a.start();
+                System.out.println("agent is starting");
+                Thread thread = new Thread(a); // Create a new Thread for the Agent
+                thread.start(); // Start the thread associated with the Agent
             }
         } else if (cmmd.equalsIgnoreCase("suspend")) {
             for (Agent a : agents) {
@@ -43,6 +45,10 @@ public class Simulation extends Model {
     public void addAgent(Agent a) {
         agents.add(a);
         a.setSimulation(this);
+    }
+
+    public List<Agent> getAgents() {
+        return agents;
     }
 
     public Agent getNeighbor(Agent a, double radius) {          // doesn't wrap around

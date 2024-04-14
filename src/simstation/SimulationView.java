@@ -1,16 +1,22 @@
 package simstation;
 
 import mvc.*;
+import java.awt.*;
 
 public class SimulationView extends View {
-    public SimulationView(Model newModel) {
-        super(newModel);
+    public SimulationView(Model model) {
+        super(model);
+        setBackground(Color.LIGHT_GRAY);
     }
 
-    /*
-    public static int FRAME_WIDTH = 830;
-    public static int FRAME_HEIGHT = 500;
-
-    I think the view should be half these values ^
-     */
+    @Override
+    public void paintComponent(Graphics gc) {
+        super.paintComponent(gc);
+        setBackground(Color.LIGHT_GRAY);
+        Simulation simulation = (Simulation) model;
+        gc.setColor(Color.WHITE);
+        for (Agent a : simulation.getAgents()) {
+            gc.fillOval(a.xc, a.yc, 10, 10);
+        }
+    }
 }
