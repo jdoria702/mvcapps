@@ -7,6 +7,8 @@ class Drunk extends Agent {
     public Drunk() {
         super();
         heading = Heading.random();
+        xc = (int) (Math.random() * 415);
+        yc = (int) (Math.random() * 500);
     }
 
     @Override
