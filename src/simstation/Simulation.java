@@ -16,7 +16,7 @@ public class Simulation extends Model {
             populate();
             // Start world clock here
             for (Agent a : agents) {
-                a.run();
+                a.start();
             }
         } else if (cmmd.equalsIgnoreCase("suspend")) {
             for (Agent a : agents) {

@@ -15,13 +15,16 @@ public abstract class Agent implements Runnable {
         this.simulation = s;
     }
 
+    public void start() {
+        myThread = Thread.currentThread();
+    }
+
     @Override
     public void run() {
-        myThread = Thread.currentThread();
-        while (!stopped) {
+        while (!isStopped()) {
             try {
                 update();
-                Thread.sleep(1000);
+                Thread.sleep(20);
                 checkSuspended();
             } catch(InterruptedException e) {
                 // do nothing for now
@@ -37,18 +40,39 @@ public abstract class Agent implements Runnable {
 
     private synchronized void checkSuspended() {
         try {
-            while(!stopped && suspended) {
+            while(!isStopped() && isSuspended()) {
                 wait();
                 suspended = false;
             }
         } catch (InterruptedException e) {
-            // do nothing for now
+            System.out.println(e);
         }
     }
 
     public void move(int steps) {
         // will change the xc and yc of the agent
         // call simulation.changed()
+        if (heading == Heading.NORTH) {
+            for (int i = 0; i < steps; i++) {
+                this.yc++;
+                simulation.changed();
+            }
+        } else if (heading == Heading.EAST) {
+            for (int i = 0; i < steps; i++) {
+                this.xc++;
+                simulation.changed();
+            }
+        } else if (heading == Heading.SOUTH) {
+            for (int i = 0; i < steps; i++) {
+                this.yc--;
+                simulation.changed();
+            }
+        } else if (heading == Heading.WEST) {
+            for (int i = 0; i < steps; i++) {
+                this.xc--;
+                simulation.changed();
+            }
+        }
     }
 
     public abstract void update();
