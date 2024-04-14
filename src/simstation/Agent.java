@@ -23,6 +23,7 @@ public abstract class Agent implements Runnable {
     public void run() {
         while (!isStopped()) {
             try {
+                System.out.println("Agent is updating");
                 update();
                 Thread.sleep(20);
                 checkSuspended();
