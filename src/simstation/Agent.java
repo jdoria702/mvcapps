@@ -16,14 +16,14 @@ public abstract class Agent implements Runnable {
     }
 
     public void start() {
-        myThread = Thread.currentThread();
+        myThread = new Thread(this);
+        myThread.start();
     }
 
     @Override
     public void run() {
         while (!isStopped()) {
             try {
-                System.out.println("Agent is updating");
                 update();
                 Thread.sleep(20);
                 checkSuspended();

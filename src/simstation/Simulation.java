@@ -1,24 +1,29 @@
 package simstation;
 
-import mvc.Model;
+import mvc.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Date;
 
 public class Simulation extends Model {
     private int clock = 0;
+    private Date startTime;
     private List<Agent> agents = new LinkedList<Agent>();
     private boolean hasStarted = false;
 
     public String execute(String cmmd) throws Exception {
-        if (cmmd.equalsIgnoreCase("start") && !hasStarted) {
-            hasStarted = true;
-            populate();
-            // Start world clock here
-            for (Agent a : agents) {
-                System.out.println("agent is starting");
-                Thread thread = new Thread(a); // Create a new Thread for the Agent
-                thread.start(); // Start the thread associated with the Agent
+        if (cmmd.equalsIgnoreCase("start")) {
+            if (hasStarted == true) {
+                Utilities.inform("Simulation has already started");
+            } else {
+                hasStarted = true;
+                startTime = new Date();
+                populate();
+                // Start world clock here
+                for (Agent a : agents) {
+                    a.start();
+                }
             }
         } else if (cmmd.equalsIgnoreCase("suspend")) {
             for (Agent a : agents) {
@@ -33,9 +38,9 @@ public class Simulation extends Model {
                 a.stop();
             }
         } else if (cmmd.equalsIgnoreCase("stats")) {
-            for (Agent a : agents) {
-                // nothing yet
-            }
+            long elapsedTime = new Date().getTime() - startTime.getTime();
+            clock = (int) (elapsedTime / 1000.0);
+            Utilities.inform("Time: " + clock + " seconds\n" + "Number of Agents: " + agents.size());
         } else {
             throw new Exception("unrecognized command: " + cmmd);
         }
