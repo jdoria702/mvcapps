@@ -13,7 +13,6 @@ class Drunk extends Agent {
 
     @Override
     public void update() {
-        System.out.println("Updating drunk");
         heading = Heading.random();
         int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
