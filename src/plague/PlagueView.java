@@ -30,13 +30,8 @@ public class PlagueView extends SimulationView {
             int r = 10;
             gc.fillOval(host.getXc(), host.getYc(), r, r);
         }
-        gc.setColor(oldColor);
+        //gc.setColor(oldColor);
 
         }
     }
-
-
-
-    //TODO override paint method to do the right colors
-
 
