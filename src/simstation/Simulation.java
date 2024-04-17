@@ -1,14 +1,11 @@
 package simstation;
 
 import mvc.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.Date;
+import java.util.*;
 
 public class Simulation extends Model {
     private int clock = 0;
-    private Date startTime;
+    transient private Timer timer;
     private List<Agent> agents = new LinkedList<Agent>();
     private boolean hasStarted = false;
 
@@ -18,7 +15,7 @@ public class Simulation extends Model {
                 Utilities.inform("Simulation has already started");
             } else {
                 hasStarted = true;
-                startTime = new Date();
+                startTimer();
                 populate();
                 // Start world clock here
                 for (Agent a : agents) {
@@ -26,25 +23,36 @@ public class Simulation extends Model {
                 }
             }
         } else if (cmmd.equalsIgnoreCase("suspend")) {
+            stopTimer();
             for (Agent a : agents) {
                 a.suspend();
             }
         } else if (cmmd.equalsIgnoreCase("resume")) {
+            startTimer();
             for (Agent a : agents) {
                 a.resume();
             }
         } else if (cmmd.equalsIgnoreCase("stop")) {
+            stopTimer();
             for (Agent a : agents) {
                 a.stop();
             }
         } else if (cmmd.equalsIgnoreCase("stats")) {
-            long elapsedTime = new Date().getTime() - startTime.getTime();
-            clock = (int) (elapsedTime / 1000.0);
             Utilities.inform("Time: " + clock + " seconds\n" + "Number of Agents: " + agents.size());
         } else {
             throw new Exception("unrecognized command: " + cmmd);
         }
         return "ok";
+    }
+
+    private void startTimer() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new ClockUpdater(), 1000, 1000);
+    }
+
+    private void stopTimer() {
+        timer.cancel();
+        timer.purge();
     }
 
     public void addAgent(Agent a) {
@@ -77,4 +85,9 @@ public class Simulation extends Model {
         // empty and will be specified in subclasses
     }
 
+    private class ClockUpdater extends TimerTask {
+        public void run() {
+            clock++;
+        }
+    }
 }
