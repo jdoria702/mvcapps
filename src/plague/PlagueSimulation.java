@@ -15,7 +15,6 @@ public class PlagueSimulation extends Simulation {
         for (int i = 0; i < 50; i++) {
             PlagueAgent host = new PlagueAgent("Host " + i);
             addAgent(host);
-            // TODO unsure how to initialize
             if (Utilities.rng.nextInt(100) < 5) {
                 host.setInfected(true);
             }
