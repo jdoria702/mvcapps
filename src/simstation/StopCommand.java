@@ -10,6 +10,6 @@ public class StopCommand extends Command {
 
     public void execute() throws Exception {
         Simulation simulation = (Simulation) model;
-        simulation.execute("stop");
+        simulation.stop();
     }
 }

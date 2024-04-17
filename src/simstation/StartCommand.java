@@ -10,6 +10,6 @@ public class StartCommand extends Command {
 
     public void execute() throws Exception {
         Simulation simulation = (Simulation) model;
-        simulation.execute("start");
+        simulation.start();
     }
 }
