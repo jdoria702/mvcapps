@@ -51,34 +51,31 @@ public abstract class Agent implements Runnable {
     public void move(int steps) {
         // will change the xc and yc of the agent
         // call simulation.changed()
+        double angleInRadians = Math.toRadians(heading.getDirection());
         for (int i = 0; i < steps; i++) {
-            if (heading == Heading.NORTH) {
-                this.yc++;
-                if (this.yc >= 430) {
-                    this.yc = 0; // Wrap to the top
-                }
-                simulation.changed();
-            } else if (heading == Heading.EAST) {
-                this.xc++;
-                if (this.xc >= 415) {
-                    this.xc = 0; // Wrap to the left
-                }
-                simulation.changed();
-            } else if (heading == Heading.SOUTH) {
-                this.yc--;
-                if (this.yc < 0) {
-                    this.yc = 430 - 1; // Wrap to the bottom
-                }
-                simulation.changed();
-            } else if (heading == Heading.WEST) {
-                this.xc--;
-                if (this.xc < 0) {
-                    this.xc = 415 - 1; // Wrap to the right
-                }
-                simulation.changed();
+            double deltaX = Math.cos(angleInRadians) * 2;
+            double deltaY = Math.sin(angleInRadians) * 2;
+
+            // Update agent's position
+            this.xc += (int) deltaX;
+            this.yc += (int) deltaY;
+
+            // Wrap around the panel
+            if (this.xc >= 415) {
+                this.xc = 0; // Wrap to the left
+            } else if (this.xc < 0) {
+                this.xc = 415 - 1; // Wrap to the right
             }
+            if (this.yc >= 430) {
+                this.yc = 0; // Wrap to the top
+            } else if (this.yc < 0) {
+                this.yc = 430 - 1; // Wrap to the bottom
+            }
+
+            simulation.changed();
         }
     }
+
 
     public int getXc() {
         return xc;

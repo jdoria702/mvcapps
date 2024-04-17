@@ -13,7 +13,7 @@ public class Prisoner extends Agent {
         super();
         strategy = s;
         s.setMyPrisoner(this);
-        heading = Heading.random();
+        heading = new Heading();
         xc = (int) (Math.random() * 415);
         yc = (int) (Math.random() * 500);
     }
@@ -36,7 +36,7 @@ public class Prisoner extends Agent {
             partner.fitness += 1;
         }
 
-        heading = Heading.random();
+        heading.random();
         int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
     }
