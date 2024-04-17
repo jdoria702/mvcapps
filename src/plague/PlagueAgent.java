@@ -25,6 +25,8 @@ public class PlagueAgent extends Agent {
             if (Utilities.rng.nextInt(100) < PlagueSimulation.RESISTANCE) {
                 resistant = true;
             }
+        xc = (int) (Math.random() * 415);
+        yc = (int) (Math.random() * 500);
         }
         @Override
         public synchronized void update() {

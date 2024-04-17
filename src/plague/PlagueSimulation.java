@@ -5,7 +5,6 @@ import simstation.Agent;
 import simstation.Simulation;
 
 public class PlagueSimulation extends Simulation {
-    // Wrong/change it
     public static int VIRULENCE = 50; // % chance of infection
     public static int RESISTANCE = 5; // % chance of resisting infection
 
