@@ -7,8 +7,6 @@ import mvc.AppPanel;
 import simstation.SimulationPanel;
 
 public class PlagueView  {
-    public static void main(String[] args) {
-        AppPanel panel = new SimulationPanel(new PlagueFactory());
-        panel.display();
-    }
+    //TODO override paint method to do the right colors
 }
+
