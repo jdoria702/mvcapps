@@ -7,4 +7,5 @@ public abstract class Strategy {
         myPrisoner = p;
     }
     public abstract boolean cooperate();
+    public abstract String getStrategy();
 }

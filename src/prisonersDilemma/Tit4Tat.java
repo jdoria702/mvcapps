@@ -8,4 +8,9 @@ public class Tit4Tat extends Strategy {
         }
         return true;
     }
+
+    @Override
+    public String getStrategy() {
+        return "Tit4Tat";
+    }
 }

@@ -5,4 +5,9 @@ public class Cheat extends Strategy {
     public boolean cooperate() {
         return false;
     }
+
+    @Override
+    public String getStrategy() {
+        return "Cheat";
+    }
 }

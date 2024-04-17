@@ -6,7 +6,7 @@ import simstation.*;
 public class Prisoner extends Agent {
     private int fitness = 0;
     protected boolean partnerCheated = false;
-    private Strategy strategy;
+    protected Strategy strategy;
     private Prisoner partner;
 
     public Prisoner(Strategy s) {
@@ -16,6 +16,10 @@ public class Prisoner extends Agent {
         heading = Heading.random();
         xc = (int) (Math.random() * 415);
         yc = (int) (Math.random() * 500);
+    }
+
+    public int getFitness() {
+        return fitness;
     }
     @Override
     public void update() {

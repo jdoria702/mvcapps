@@ -8,4 +8,9 @@ public class RandomlyCooperate extends Strategy{
         Random random = new Random();
         return random.nextBoolean();
     }
+
+    @Override
+    public String getStrategy() {
+        return "RandomlyCooperate";
+    }
 }

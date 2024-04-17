@@ -5,10 +5,6 @@ import simstation.*;
 
 public class PrisonersDilemmaSimulation extends Simulation {
     private int agentSize = 40;
-    protected int cooperateScore = 0;
-    protected int randomlyCooperateScore = 0;
-    protected int cheatScore = 0;
-    protected int tit4TatScore = 0;
 
     public void populate() {
         for (int i = 0; i < agentSize / 4; i++) {
@@ -20,11 +16,38 @@ public class PrisonersDilemmaSimulation extends Simulation {
     }
 
     public void stats() {
+        int cooperateScore = 0;
+        int randomlyCooperateScore = 0;
+        int cheatScore = 0;
+        int tit4TatScore = 0;
+
+        for (Agent agent : agents) {
+            Prisoner prisoner = (Prisoner) agent;
+            String strategy = prisoner.strategy.getStrategy();
+            switch (strategy) {
+                case "Cooperate":
+                    cooperateScore += prisoner.getFitness();
+                    break;
+                case "RandomlyCooperate":
+                    randomlyCooperateScore += prisoner.getFitness();
+                    break;
+                case "Cheat":
+                    cheatScore += prisoner.getFitness();
+                    break;
+                case "Tit4Tat":
+                    tit4TatScore += prisoner.getFitness();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         Utilities.inform("Time: " + clock + " seconds\n" +
-                "Cooperate fitness: " + agents.size() + "\n" +
-                "RandomlyCooperate fitness: " + agents.size() + "\n" +
-                "Cheat fitness: " + agents.size() + "\n" +
-                "Tit4Tat fitness: " + agents.size() + "\n");
+                "AVERAGE FITNESS \n" +
+                "Cooperate fitness (GREEN) : " + cooperateScore / 4 + "\n" +
+                "RandomlyCooperate fitness (CYAN) : " + randomlyCooperateScore / 4 + "\n" +
+                "Cheat fitness (RED) : " + cheatScore / 4+ "\n" +
+                "Tit4Tat fitness (ORANGE) : " + tit4TatScore / 4+ "\n");
     }
 
     public static void main(String[] args) {
