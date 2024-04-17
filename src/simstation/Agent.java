@@ -54,7 +54,7 @@ public abstract class Agent implements Runnable {
         for (int i = 0; i < steps; i++) {
             if (heading == Heading.NORTH) {
                 this.yc++;
-                if (this.yc >= 500) {
+                if (this.yc >= 430) {
                     this.yc = 0; // Wrap to the top
                 }
                 simulation.changed();
@@ -67,7 +67,7 @@ public abstract class Agent implements Runnable {
             } else if (heading == Heading.SOUTH) {
                 this.yc--;
                 if (this.yc < 0) {
-                    this.yc = 500 - 1; // Wrap to the bottom
+                    this.yc = 430 - 1; // Wrap to the bottom
                 }
                 simulation.changed();
             } else if (heading == Heading.WEST) {
