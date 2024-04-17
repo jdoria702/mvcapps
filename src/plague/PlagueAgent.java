@@ -8,14 +8,12 @@
 //
 //public class PlagueAgent extends Agent {
 //
-//    public PlagueAgent(String name, PlagueSimulation world, boolean infected) {
-//        final Color HEALTHY_COLOR = Color.GREEN;
-//        final Color INFECTED_COLOR = Color.RED;
-//        final int RADIUS = 10;
-//        final int MAX_SPEED = 3;
-//
-//        private boolean infected;
-//        private boolean resistant;
+//    private boolean infected;
+//    private boolean resistant;
+//    final Color HEALTHY_COLOR = Color.GREEN;
+//    final Color INFECTED_COLOR = Color.RED;
+//    final int RADIUS = 10;
+//    final int MAX_SPEED = 3;
 //
 //    public PlagueAgent() {
 //            this("");
@@ -30,7 +28,7 @@
 //        }
 //        @Override
 //        public synchronized void update() {
-//            Agent neighbor = world.getNeighbor(this, RADIUS);
+//            Agent neighbor = simulation.getNeighbor(this, RADIUS);
 //            if (!resistant && neighbor != null) {
 //                if (neighbor instanceof PlagueAgent host) {
 //                    if (host.isInfected()) {
@@ -40,7 +38,7 @@
 //                    }
 //                }
 //            }
-//            randomHeading();
+//            heading.random();
 //            int steps = Utilities.rng.nextInt(MAX_SPEED) + 1;
 //            move(steps);
 //        }

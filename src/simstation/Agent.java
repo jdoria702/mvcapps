@@ -9,6 +9,14 @@ public abstract class Agent implements Runnable {
     protected int yc;
     private boolean suspended = false, stopped = false;
 
+    public Agent(String name) {
+        this.name = name;
+    }
+
+    public Agent() {
+
+    }
+
     public void setSimulation(Simulation s) {
         this.simulation = s;
     }
