@@ -3,7 +3,7 @@ package simstation;
 import java.io.Serializable;
 
 public abstract class Agent implements Runnable {
-    private Simulation simulation;
+    protected Simulation simulation;
     private Thread myThread;
     private String name;
     protected Heading heading;

@@ -4,45 +4,49 @@ import mvc.*;
 import java.util.*;
 
 public class Simulation extends Model {
-    private int clock = 0;
+    protected int clock = 0;
     transient private Timer timer;
-    private List<Agent> agents = new LinkedList<Agent>();
+    protected List<Agent> agents = new LinkedList<Agent>();
     private boolean hasStarted = false;
 
-    public String execute(String cmmd) throws Exception {
-        if (cmmd.equalsIgnoreCase("start")) {
-            if (hasStarted == true) {
-                Utilities.inform("Simulation has already started");
-            } else {
-                hasStarted = true;
-                startTimer();
-                populate();
-                // Start world clock here
-                for (Agent a : agents) {
-                    a.start();
-                }
-            }
-        } else if (cmmd.equalsIgnoreCase("suspend")) {
-            stopTimer();
-            for (Agent a : agents) {
-                a.suspend();
-            }
-        } else if (cmmd.equalsIgnoreCase("resume")) {
-            startTimer();
-            for (Agent a : agents) {
-                a.resume();
-            }
-        } else if (cmmd.equalsIgnoreCase("stop")) {
-            stopTimer();
-            for (Agent a : agents) {
-                a.stop();
-            }
-        } else if (cmmd.equalsIgnoreCase("stats")) {
-            Utilities.inform("Time: " + clock + " seconds\n" + "Number of Agents: " + agents.size());
+
+    public void start() {
+        if (hasStarted == true) {
+            Utilities.inform("Simulation has already started");
         } else {
-            throw new Exception("unrecognized command: " + cmmd);
+            hasStarted = true;
+            startTimer();
+            populate();
+            // Start world clock here
+            for (Agent a : agents) {
+                a.start();
+            }
         }
-        return "ok";
+    }
+
+    public void suspend() {
+        stopTimer();
+        for (Agent a : agents) {
+            a.suspend();
+        }
+    }
+
+    public void resume() {
+        startTimer();
+        for (Agent a : agents) {
+            a.resume();
+        }
+    }
+
+    public void stop() {
+        stopTimer();
+        for (Agent a : agents) {
+            a.stop();
+        }
+    }
+
+    public void stats() {
+        Utilities.inform("Time: " + clock + " seconds\n" + "Number of Agents: " + agents.size());
     }
 
     private void startTimer() {
