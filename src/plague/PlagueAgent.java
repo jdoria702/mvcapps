@@ -2,58 +2,63 @@
 //
 //import simstation.Agent;
 //import simstation.Heading;
+//import mvc.Utilities;
+//
+//import java.awt.*;
 //
 //public class PlagueAgent extends Agent {
 //
 //    public PlagueAgent(String name, PlagueSimulation world, boolean infected) {
-//        this(name, world);
-//        this.infected = infected;
-//    }
+//        final Color HEALTHY_COLOR = Color.GREEN;
+//        final Color INFECTED_COLOR = Color.RED;
+//        final int RADIUS = 10;
+//        final int MAX_SPEED = 3;
 //
-//    public boolean isInfected() {
-//        return infected;
-//    }
+//        private boolean infected;
+//        private boolean resistant;
 //
-//    private boolean infected;
+//    public PlagueAgent() {
+//            this("");
+//        }
 //
-//
-//    public PlagueAgent(String name, PlagueSimulation world) {
-//        super(name, world);
-//        infected = false;
-//    }
-//
-//    @Override
-//    public void update() {
-//        moveRandomly();
-//
-//        PlagueAgent neighbor = (PlagueAgent) world.getNeighbor(this);
-//
-//        if (this.infected)
-//            infectOthers(neighbor);
-//
-//        world.changed();
-//    }
-//
-//    private void moveRandomly() {
-//        this.heading = Heading.values()[random.nextInt(4)];
-//        this.speed = random.nextInt(10);
-//
-//        move(speed);
-//        world.changed();
-//    }
-//
-//    private void infectOthers(PlagueAgent target) {
-//
-//        int randomNumber = (int) (random.nextDouble() * 100);
-//
-//        if (randomNumber < PlagueSimulation.VIRULENCE) {
-//
-//            randomNumber = (int) (random.nextDouble() * 100);
-//
-//            if (randomNumber > PlagueSimulation.RESISTANCE && !target.isInfected()) {
-//                target.infected = true;
-//                PlagueSimulation world = (PlagueSimulation) this.world;
+//    public PlagueAgent(String name) {
+//            super(name);
+//            infected = false;
+//            if (Utilities.rng.nextInt(100) < PlagueSimulation.RESISTANCE) {
+//                resistant = true;
 //            }
 //        }
+//        @Override
+//        public synchronized void update() {
+//            Agent neighbor = world.getNeighbor(this, RADIUS);
+//            if (!resistant && neighbor != null) {
+//                if (neighbor instanceof PlagueAgent host) {
+//                    if (host.isInfected()) {
+//                        if (Utilities.rng.nextInt(100) < PlagueSimulation.VIRULENCE) {
+//                            infected = true;
+//                        }
+//                    }
+//                }
+//            }
+//            randomHeading();
+//            int steps = Utilities.rng.nextInt(MAX_SPEED) + 1;
+//            move(steps);
+//        }
+//
+//        @Override
+//        public Color getColor () {
+//            if (infected) {
+//                return INFECTED_COLOR;
+//            }
+//            return HEALTHY_COLOR;
+//        }
+//
+//        public boolean isInfected () {
+//            return infected;
+//        }
+//
+//        public void setInfected (boolean infected){
+//            this.infected = infected;
+//        }
+//
 //    }
-//}
