@@ -35,13 +35,21 @@ public class Prisoner extends Agent {
         if (this.strategy.cooperate() && partner.strategy.cooperate()) {
             this.fitness += 3;
             partner.fitness += 3;
+            this.partnerCheated = false;
+            partner.partnerCheated = false;
         } else if (this.strategy.cooperate() && !partner.strategy.cooperate()) {
             partner.fitness += 5;
+            this.partnerCheated = true;
+            partner.partnerCheated = false;
         } else if (!this.strategy.cooperate() && partner.strategy.cooperate()) {
             this.fitness += 5;
+            this.partnerCheated = false;
+            partner.partnerCheated = true;
         } else if (!this.strategy.cooperate() && !partner.strategy.cooperate()) {
             this.fitness += 1;
             partner.fitness += 1;
+            this.partnerCheated = true;
+            partner.partnerCheated = true;
         }
 
         move(steps);
