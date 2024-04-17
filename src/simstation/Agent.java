@@ -1,7 +1,5 @@
 package simstation;
 
-import java.io.Serializable;
-
 public abstract class Agent implements Runnable {
     protected Simulation simulation;
     private Thread myThread;
@@ -80,6 +78,14 @@ public abstract class Agent implements Runnable {
                 simulation.changed();
             }
         }
+    }
+
+    public int getXc() {
+        return xc;
+    }
+
+    public int getYc() {
+        return yc;
     }
 
     public abstract void update();

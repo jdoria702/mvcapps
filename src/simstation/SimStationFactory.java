@@ -24,7 +24,7 @@ public class SimStationFactory implements AppFactory {
     @Override
     public String[] getHelp() {
         return new String[] {
-                "Click buttons and it'll do what it says"
+                "Click the buttons to start, suspend, resume, stop, and see the stats of the current simulation"
         };
     }
 
