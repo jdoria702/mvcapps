@@ -21,8 +21,11 @@ public class PlagueSimulation extends Simulation {
         }
     }
 
-    //@Override
-    //TODO rewrite the method similarly to the prisoners dilemma
+    @Override
+    public void stats() {
+        Utilities.inform(getStats());
+    }
+
     public String[] getStats() {
         String[] statsStrings = new String[3];
         statsStrings[0] = "# agents = " + agents.size();
