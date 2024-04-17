@@ -24,6 +24,14 @@ public class Prisoner extends Agent {
     @Override
     public void update() {
         partner = (Prisoner) simulation.getNeighbor(this, 10);
+        heading.random();
+        int steps = Utilities.rng.nextInt(10) + 1;
+
+        if (partner == null) {
+            move(steps);
+            return;
+        }
+
         if (this.strategy.cooperate() && partner.strategy.cooperate()) {
             this.fitness += 3;
             partner.fitness += 3;
@@ -36,8 +44,6 @@ public class Prisoner extends Agent {
             partner.fitness += 1;
         }
 
-        heading.random();
-        int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
     }
 }
