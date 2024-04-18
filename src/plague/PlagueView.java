@@ -31,7 +31,5 @@ public class PlagueView extends SimulationView {
             gc.fillOval(host.getXc(), host.getYc(), r, r);
         }
         //gc.setColor(oldColor);
-
-        }
     }
-
+}

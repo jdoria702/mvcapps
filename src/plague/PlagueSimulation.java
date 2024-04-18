@@ -45,4 +45,3 @@ public class PlagueSimulation extends Simulation {
         AppPanel panel = new SimulationPanel(new PlagueFactory());
         panel.display();
     }
-}
