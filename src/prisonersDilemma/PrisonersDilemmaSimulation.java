@@ -4,7 +4,7 @@ import mvc.*;
 import simstation.*;
 
 public class PrisonersDilemmaSimulation extends Simulation {
-    private int agentSize = 40;
+    private final int agentSize = 40;
 
     public void populate() {
         for (int i = 0; i < agentSize / 4; i++) {
@@ -16,10 +16,10 @@ public class PrisonersDilemmaSimulation extends Simulation {
     }
 
     public void stats() {
-        int cooperateScore = 0;
-        int randomlyCooperateScore = 0;
-        int cheatScore = 0;
-        int tit4TatScore = 0;
+        double cooperateScore = 0;
+        double randomlyCooperateScore = 0;
+        double cheatScore = 0;
+        double tit4TatScore = 0;
 
         for (Agent agent : agents) {
             Prisoner prisoner = (Prisoner) agent;
@@ -44,10 +44,10 @@ public class PrisonersDilemmaSimulation extends Simulation {
 
         Utilities.inform("Time: " + clock + " seconds\n" +
                 "AVERAGE FITNESS \n" +
-                "Cooperate fitness (GREEN) : " + cooperateScore / 4 + "\n" +
-                "RandomlyCooperate fitness (CYAN) : " + randomlyCooperateScore / 4 + "\n" +
-                "Cheat fitness (RED) : " + cheatScore / 4+ "\n" +
-                "Tit4Tat fitness (ORANGE) : " + tit4TatScore / 4+ "\n");
+                "Cooperate fitness (GREEN) : " + cooperateScore / 10 + "\n" +
+                "RandomlyCooperate fitness (CYAN) : " + randomlyCooperateScore / 10 + "\n" +
+                "Cheat fitness (RED) : " + cheatScore / 10 + "\n" +
+                "Tit4Tat fitness (ORANGE) : " + tit4TatScore / 10 + "\n");
     }
 
     public static void main(String[] args) {

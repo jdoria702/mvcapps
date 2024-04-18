@@ -2,8 +2,6 @@ package prisonersDilemma;
 
 import mvc.*;
 import simstation.SimStationFactory;
-import simstation.Simulation;
-import simstation.SimulationView;
 
 public class PrisonersDilemmaFactory extends SimStationFactory {
     public Model makeModel() { return new PrisonersDilemmaSimulation(); }
