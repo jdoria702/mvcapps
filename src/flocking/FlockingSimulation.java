@@ -9,7 +9,7 @@ import simstation.Heading;
 
 public class FlockingSimulation extends Simulation {
     public void populate() {
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 40; i++)
             addAgent(new Bird());
     }
 
