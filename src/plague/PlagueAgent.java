@@ -1,4 +1,3 @@
-
 package plague;
 
 import simstation.Agent;
@@ -17,50 +16,50 @@ public class PlagueAgent extends Agent {
     final int MAX_SPEED = 3;
 
     public PlagueAgent() {
-        this("");
-    }
+            this("");
+        }
 
     public PlagueAgent(String name) {
-        super(name);
-        infected = false;
-        if (Utilities.rng.nextInt(100) < PlagueSimulation.RESISTANCE) {
-            resistant = true;
-        }
+            super(name);
+            infected = false;
+            if (Utilities.rng.nextInt(100) < PlagueSimulation.RESISTANCE) {
+                resistant = true;
+            }
         xc = (int) (Math.random() * 415);
         yc = (int) (Math.random() * 500);
-    }
-    @Override
-    public synchronized void update() {
-        Agent neighbor = simulation.getNeighbor(this, RADIUS);
-        if (!resistant && neighbor != null) {
-            if (neighbor instanceof PlagueAgent host) {
-                if (host.isInfected()) {
-                    if (Utilities.rng.nextInt(100) < PlagueSimulation.VIRULENCE) {
-                        infected = true;
+        }
+        @Override
+        public synchronized void update() {
+            Agent neighbor = simulation.getNeighbor(this, RADIUS);
+            if (!resistant && neighbor != null) {
+                if (neighbor instanceof PlagueAgent host) {
+                    if (host.isInfected()) {
+                        if (Utilities.rng.nextInt(100) < PlagueSimulation.VIRULENCE) {
+                            infected = true;
+                        }
                     }
                 }
             }
+            heading = new Heading();
+            heading.random();
+            int steps = Utilities.rng.nextInt(MAX_SPEED) + 1;
+            move(steps);
         }
-        heading = new Heading();
-        heading.random();
-        int steps = Utilities.rng.nextInt(MAX_SPEED) + 1;
-        move(steps);
-    }
 
-    //@Override
-    public Color getColor () {
-        if (infected) {
-            return INFECTED_COLOR;
+        //@Override
+        public Color getColor () {
+            if (infected) {
+                return INFECTED_COLOR;
+            }
+            return HEALTHY_COLOR;
         }
-        return HEALTHY_COLOR;
-    }
 
-    public boolean isInfected () {
-        return infected;
-    }
+        public boolean isInfected () {
+            return infected;
+        }
 
-    public void setInfected (boolean infected){
-        this.infected = infected;
-    }
+        public void setInfected (boolean infected){
+            this.infected = infected;
+        }
 
-}
+    }

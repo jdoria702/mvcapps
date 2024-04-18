@@ -1,4 +1,3 @@
-
 package plague;
 
 import mvc.AppPanel;
@@ -46,4 +45,3 @@ public class PlagueSimulation extends Simulation {
         AppPanel panel = new SimulationPanel(new PlagueFactory());
         panel.display();
     }
-}

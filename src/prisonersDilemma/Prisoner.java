@@ -24,20 +24,34 @@ public class Prisoner extends Agent {
     @Override
     public void update() {
         partner = (Prisoner) simulation.getNeighbor(this, 10);
+        heading.random();
+        int steps = Utilities.rng.nextInt(10) + 1;
+
+        if (partner == null) {
+            move(steps);
+            return;
+        }
+
         if (this.strategy.cooperate() && partner.strategy.cooperate()) {
             this.fitness += 3;
             partner.fitness += 3;
+            this.partnerCheated = false;
+            partner.partnerCheated = false;
         } else if (this.strategy.cooperate() && !partner.strategy.cooperate()) {
             partner.fitness += 5;
+            this.partnerCheated = true;
+            partner.partnerCheated = false;
         } else if (!this.strategy.cooperate() && partner.strategy.cooperate()) {
             this.fitness += 5;
+            this.partnerCheated = false;
+            partner.partnerCheated = true;
         } else if (!this.strategy.cooperate() && !partner.strategy.cooperate()) {
             this.fitness += 1;
             partner.fitness += 1;
+            this.partnerCheated = true;
+            partner.partnerCheated = true;
         }
 
-        heading.random();
-        int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
     }
 }

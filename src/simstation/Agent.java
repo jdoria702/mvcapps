@@ -61,8 +61,8 @@ public abstract class Agent implements Runnable {
         // call simulation.changed()
         double angleInRadians = Math.toRadians(heading.getDirection());
         for (int i = 0; i < steps; i++) {
-            double deltaX = Math.cos(angleInRadians) * 2;
-            double deltaY = Math.sin(angleInRadians) * 2;
+            double deltaX = Math.cos(angleInRadians) * 1.5;
+            double deltaY = Math.sin(angleInRadians) * 1.5;
 
             // Update agent's position
             this.xc += (int) deltaX;
