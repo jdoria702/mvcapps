@@ -4,7 +4,7 @@ import mvc.*;
 import simstation.*;
 
 public class PrisonersDilemmaSimulation extends Simulation {
-    private int agentSize = 40;
+    private final int agentSize = 40;
 
     public void populate() {
         for (int i = 0; i < agentSize / 4; i++) {
