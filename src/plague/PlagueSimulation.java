@@ -41,7 +41,9 @@ public class PlagueSimulation extends Simulation {
         statsStrings[2] = String.format("%% infected = %.1f", infectedCount * 100.0 / agents.size());
         return statsStrings;
     }
+
     public static void main(String[] args) {
         AppPanel panel = new SimulationPanel(new PlagueFactory());
         panel.display();
     }
+}

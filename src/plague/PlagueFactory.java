@@ -21,3 +21,4 @@ public class PlagueFactory extends SimStationFactory {
     public View makeView(Model m) {
         return new PlagueView((Simulation) m);
     }
+}
